@@ -1,6 +1,4 @@
 NTB Servlet
 ===
 
-<h2>Online Real Estate Application</h2>
-
-
+<h3>Online Real Estate Application</h3>
