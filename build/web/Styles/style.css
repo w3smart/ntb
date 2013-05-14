@@ -1,0 +1,757 @@
+
+
+/************* right Col*********/
+#right-col h3
+{
+margin:0px;
+}
+.right-col-link
+{
+display:block;
+font-size:17px;
+padding-left:50px;
+padding-top:5px;
+
+}
+#right-col img 
+{
+padding-left:30px;
+padding-right:12px;
+}
+#right-col
+{
+    
+    height: 360px;
+    background:rgb(246,246,246);
+}
+
+
+a.menupages
+{
+display:block;
+
+padding: 8px 0px;
+background: rgb(246,246,246);
+margin:0px;
+color:rgb(75,79,93);
+}
+a.menupages
+{
+padding-left:20px;
+}
+#right-col div
+{
+background: rgb(246,246,246);
+}
+/*************  end right Col****/
+
+
+
+
+
+
+
+
+
+
+
+
+
+body
+{
+    color: rgb(136, 136, 136);
+    font-family: Cuprum,Helvetica,sans-serif;
+    background: url("../Images/bg-body.jpg") repeat scroll 0% 0% transparent; 
+    font-size: 16px;
+    line-height: 20px;
+    margin:0px;
+    padding: 0px;
+}
+
+a,.fkLink,#effect a
+{
+    text-decoration: none;
+    color: rgb(78, 91, 112);
+}
+a:hover,.fkLink:hover,#effect a:hover
+{
+    color: rgb(220, 60, 0);
+}
+b
+{
+font-weight:normal;
+}
+
+#container
+{
+    margin: 0px auto;
+    padding-top: 0px;
+    width: 1022px; /* ---- -2 border = 1024 ****/
+    border: 1px solid rgb(189, 189, 189);
+    border-top: 4px solid rgb(42,49,59);
+    background-color:white;
+    height: auto;
+    box-shadow: 0px 0px 6px rgb(189, 189, 189);
+}
+
+#header
+{
+    float:left;
+    width: 100%;
+    margin: 0px auto;
+    height:53px;
+    background:none repeat scroll 0% 0% rgb(246, 246, 246);
+    border-top: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(229, 229, 229);
+}
+.header-menu
+{
+    width: auto;
+    float:right;
+    padding: 16px 0px;
+    padding-right:31px;
+
+}
+.header-logo
+{
+    width: 200px;
+    float:left;
+    padding-top: 22px;
+    padding-left:31px;
+}
+
+.header-menu ul
+{
+    list-style: none;
+    overflow:visible;
+    position:relative;
+    float:right;
+    margin:0px;
+    padding: 0px 0px;
+}
+.header-menu ul li
+{
+    display:block;
+    position:relative;
+    float:left;
+    height: auto;
+    padding: 0px 0px;
+}
+
+.header-menu ul li a
+{
+    margin-top:0px 0px;
+    font-weight: normal;
+    padding:16px 15px ;
+    font-size: 18px;
+    border-right:1px solid rgb(229, 229, 229);
+
+}
+.header-menu ul li a.right
+{
+    border-right: 0px solid white;
+
+}
+.header-menu ul li a:hover ,.header-menu ul li a.right:hover
+{
+    background: none repeat scroll 0% 0% rgb(240, 240, 240);
+}
+
+
+.header-menu ul li a:visited
+{
+    background:none repeat scroll 0% 0% rgb(240, 240, 240);
+}
+
+
+
+
+#wrapper
+{
+    margin:0px auto;
+    width:100%;
+    float:left;
+    height:auto;
+    background:white;
+}
+#content
+{
+    margin:0px auto;
+    width:960px;
+
+}
+
+#nvSlider
+{
+    width:100%;
+    height:360px;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    margin-bottom: 30px;
+}
+
+
+
+#left-body-content
+{
+    width : 680px;
+    float:left;
+    padding-right: 40px;
+    margin-bottom: 40px;
+}
+.left-Content p
+{
+    text-align:justify;
+
+}
+
+#right-body-content
+{
+    width: 240px;
+    float:left;
+    height:auto;
+    margin-bottom: 90px;
+}
+#article p
+{
+    text-align:justify;
+
+}
+#article
+{
+    border-bottom: 1px solid rgb(136,136,136);
+}
+
+h2.content-title
+{
+    font-weight: normal;
+    line-height: normal;
+    font-family: 'Cuprum',sans-serif;
+    margin-bottom: 10px;
+    color: rgb(78, 91, 112);
+    border: 0px none;
+    font: inherit;
+    vertical-align: baseline;
+    font-size: 18px;
+}
+h3.content-subtitle , h3.featured-title
+{
+    color: rgb(78, 91, 112);
+    margin-bottom: 18px;
+    font-weight: normal;
+    line-height: normal;
+    font-family: 'Cuprum',sans-serif;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    font: inherit;
+    vertical-align: baseline;
+    text-align:justify;
+    font-size: 16px;
+}
+
+
+
+#featured-left,#featured-right
+{
+    float:left;
+    width: 330px;
+    margin-bottom:10px;
+}
+#featured-right
+{
+    padding-left: 20px;
+}
+#featured
+{
+
+    position:relative;
+    width: 100%;
+}
+
+#featured-left img,#featured-right img
+{
+    width: 330px;
+    height: 140px;
+    padding-bottom: 10px;
+}
+#featured-left span,#featured-right span
+{
+    display:block;
+    padding-top: 10px;
+    text-align:justify;
+}
+#featured-left p,#featured-right p
+{
+    display:block;
+}
+a.readmore,button.readmore
+{
+    color: rgb(255, 255, 255);
+    display:block;
+    width:92px;
+    text-align:center;
+    line-height: 26px;
+    background: none repeat scroll 0% 0% rgb(78, 91, 112);
+}
+
+a.readmore:hover,button.readmore:hover
+{
+    background: none repeat scroll 0% 0% rgb(40, 46, 56);
+}
+
+/*        right-body-content*/
+
+
+#news
+{
+    margin:0px;
+    padding:0px;
+}
+
+#news h3
+{
+      font-size:24px;
+      font-weight:normal;
+      line-height:normal;
+    display:block;
+}
+h3,.tblListComp th,b,h1,h2,h4
+{
+color: rgb(78, 91, 112);
+font-weight:normal;
+}
+#news ul
+{
+    margin:0px;
+    list-style:none;
+    float:left;
+    padding: 0px;
+}
+#news ul li
+{
+    margin:0px;
+    padding: 0px;
+}
+
+#news ul li .news-item
+{
+    margin:0px;
+    padding: 0px;
+}
+#news ul li .news-item h3
+{
+    margin:0px;
+    padding:0px;
+    font-weight: normal;
+}
+
+#news ul li .news-item h3 a
+{
+    display:block;
+    margin: 0px;
+    color: rgb(78, 91, 112);
+}
+.news-itemInfo
+{
+    margin: 0px;
+    display:block;
+    font-size: 12px;
+    padding-top:4px;
+    padding-bottom: 8px;
+    font-style: italic;
+}
+.news-itemInfo a,#contact-info a
+{
+    color: rgb(220, 60, 0);
+}
+span.news-itemContent
+{
+    padding-bottom: 34px;
+    display:block;
+
+}
+
+#mi-downloadImg
+{
+    float:left;
+    width: 100%;
+}
+
+#mi-downloadImg a
+{
+    color: rgb(220, 60, 0);
+}
+
+
+/*    end right-body-content*/
+
+
+
+#effects {
+    width: 160px;
+    height: 124px;
+    padding: 0.4em;
+    z-index: 20;
+    position: absolute;
+    top: -148px;
+    right: -4px;
+}
+#effect a
+{
+    display:block;
+    width: 100%;
+}
+#effect p
+{
+    margin:0px;
+    padding:3px;
+    display:block;
+}
+
+#footer
+{
+    float:left;
+    width: 100%;
+    clear:both;
+    background: none repeat scroll 0% 0% rgb(78, 91, 112);
+    font-size: 12px;
+    position:relative;
+
+}
+#footer-content,.addr
+{
+
+    margin: 0px auto;
+    width: 960px;
+}
+.addr
+{
+    padding: 10px 0px;
+}
+#company
+{
+    border-top: 1px solid rgb(196, 196, 196);
+    float:left;
+    width: 100%;
+    padding: 10px 0px;
+    background:none repeat scroll 0% 0% rgb(246, 246, 246);
+}
+
+span.spUser
+{
+    display: block;
+    width: 180px;
+    text-align: right;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-left: 280px;
+}
+span.spUser a
+{
+    color:white;
+}
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+
+
+
+#frmLogin input
+{
+    width: 200px;
+    padding: 3px;
+    margin: 10px 10px;
+    height: 20px;
+}
+
+
+
+
+
+/***************** Contact Form- Contact Info *********/
+#contact-form
+{
+    float:left;
+    width: 580px;
+
+}
+
+
+#contact-info
+{
+    float:left;
+}
+#contact-info p
+{
+    display:block;
+    float:left;
+    width: 100%;
+    padding: 5px 0px;
+
+}
+#contact-form form input
+{
+    width: 390px;
+    font-size: 16px;
+    padding: 10px 10px;
+    margin: 10px 0px;
+}
+#contact-form form textarea
+{
+    min-width: 520px;
+    max-width: 580px;
+    min-height: 240px;
+    max-height: 440px;
+    padding: 10px 10px;
+    margin: 10px 0px;
+    font-size: 16px;
+}
+#contact-form form button
+{
+    color: rgb(255, 255, 255);
+    display: block;
+    line-height: 28px;
+    height: 38px;
+    text-align: center;
+    font-size: 14px;
+    background: none repeat scroll 0% 0% rgb(78, 91, 112);
+}
+
+#divLogin
+{
+    margin-top:120px;
+    margin-left:150px;
+    width: 320px;
+    margin-bottom:380px;
+}
+/***************** End Contact Form- Contact Info *********/
+
+
+/***************** Table List Complaint comlaint.jsp *********/
+.tblListComp .tbl-title
+{
+    width: 220px;
+}
+.tblListComp th
+{
+    font-weight:normal;
+    background: none repeat scroll 0% 0% rgb(238, 238, 238);
+    padding: 5px;
+    text-align: left;
+    color: rgb(20,20,20);
+}
+.tblListComp td
+{
+    padding:5px 5px;
+    color: rgb(22,38,53);
+}
+.tblListComp
+{
+    text-align:left;
+    width:100%;
+    line-height:16px;
+    border: 1px solid rgb(195, 195, 195);
+}
+.tblListComp .submitedDate
+{
+    background: none repeat scroll 0% 0% rgb(238, 238, 238);
+    font-weight:bold;
+}
+
+.tblListComp  a {
+    color: rgb(38, 96, 142);
+    text-decoration: underline;
+}
+
+.approved {
+   
+    color: rgb(37, 162, 31);
+}
+/***************** End Table List Complaint *********/
+.pagination a,.pagination span
+{
+    padding:6px;
+    margin:2px;
+    border:1px solid rgb(217,217,217);
+}
+.pagination
+{
+    margin-top:20px;
+}
+.tblCompDetail .leftTd,.tblCompDetail td
+{
+    width: 170px;
+}
+
+.tblCompDetail td
+{
+ padding: 5px 0px;
+}
+
+#effect
+{
+    position:relative;
+    z-index:10;
+    top:20px;
+}
+
+.toggler { width: 300px; height: 200px; }
+#button { padding: .5em 1em; text-decoration: none; }
+#effect { width: 160px; height: 174px; padding: 0.4em; position: relative; }
+
+#footer-content div p
+{
+    display:block;
+    float:left;
+}
+#footer-content div span
+{
+    float:left;
+}
+
+
+
+
+/**************** Blog *****************/
+/* Blog */
+.navBlog
+{
+    width:100%;
+   padding-top:20px;
+    float:left;
+}
+.blogItem
+{
+margin:0px;
+padding-bottom: 20px;
+width: 100%;
+border-bottom: 1px solid rgb(234, 234, 234);
+margin-bottom:30px;
+}
+.blogItem-img img
+{
+   width: 100%;
+   height: 190px;
+   padding-top: 20px;
+}
+
+.blogItem-title
+{
+    font-weight: normal;
+    display:block;
+    width: 100%;
+    margin-bottom: 0px;
+    line-height:28px;
+    font-size:24px;
+}
+.blogItem-content
+{
+    width: 100%;
+    display:block;
+    text-align:justify;
+}
+
+p.blogItem-info
+{
+    margin: 0px;
+    padding: 0px;
+}
+p.blogItem-info span.news-itemInfo
+{
+  margin: 0px;
+  padding: 0px;
+}
+.blog-pagenav
+{
+padding: 0px;
+margin-bottom: 50px;
+clear: both;
+font-size:18px;
+}
+.next a:hover,.blogItem-title a:hover
+{
+color:rgb(220,60,0);
+}
+.next a,.blogItem-title
+{
+color: rgb(83, 94, 112);
+}
+.slDisplayBy
+{
+padding: 2px;
+border-radius: 0px 0px 0px 0px;
+display: inline-block !important;
+width: 100px;
+height: 28px;
+float: right;
+border: 1px solid rgb(221, 221, 221);
+margin: 0px;
+
+}
+
+/*************** End Blog **************/
+#empInfo
+{
+margin:0px;
+padding-top:20px;
+}
+#empInfo p
+{
+padding-bottom:8px;
+margin:0px;
+}
+#frmComplaint input[type='text'],#frmSvComp input[type='text']
+{
+border: 1px solid rgb(238, 238, 238);
+width: 490px;
+height:17px;
+padding: 8px;
+margin: 10px 0px;
+
+}
+#frmSvComp td
+{
+padding: 4px 5px
+}
+.dv-frmSvComp
+{
+margin-top:24px;
+}
+
+#frmComplaint textarea,#frmSvComp textarea
+{
+height:190px;
+width:500px;
+resize:none;
+}
+#frmComplaint td
+{
+
+padding:5px 0px;
+}
+
+/************ employee ****************/
+#frmInsertEmp table,#frmInsertEmp select,#frmInsertEmp input[type='text'],#frmInsertEmp input[type='password']
+,#frmInsertEmp button,#frmInsertEmp textarea
+{
+font-family:'Cuprum'
+
+}
+
+#frmInsertEmp table td
+{
+padding: 5px 10px;
+}
+#frmInsertEmp input[type='text'],#frmInsertEmp input[type='password']
+{
+width: 240px;
+}
+#frmInsertEmp textarea
+{
+width:240px;
+height:100px;
+resize:none;
+}
+/************ end employee ****************/
+
+
+
+

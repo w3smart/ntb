@@ -1,0 +1,26 @@
+/* 
+    Document   : newcss
+    Created on : Jan 2, 2013, 1:36:48 PM
+    Author     : Hoanvd
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+#effect a
+{
+color:red;
+}
+#effect
+{
+    position: relative;
+z-index:10;
+bottom:8px;
+}
