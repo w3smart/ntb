@@ -6,9 +6,9 @@ package entity;
 
 /**
  *
- * @author Hoanvd
+ * @author tannt
  */
-public class Account extends Person {
+public class Account{
     private String accountType;
 
     public String getAccountType() {

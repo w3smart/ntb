@@ -32,16 +32,16 @@ public class AccountDA {
             rs = cs.executeQuery();
             while (rs.next()) {
                 Account account = new Account();
-                account.setPersonId(rs.getInt(1));
-                account.setUserName(rs.getString(2));
-                account.setPassword(rs.getString(3));
-                account.setFullName(rs.getString(4));
-                account.setEmail(rs.getString(5));
-                account.setBirthDate(rs.getDate(6));
-                account.setJoinedDate(rs.getDate(7));
-                account.setAddress(rs.getString(8));
-                account.setDepartmentId(rs.getInt(9));
-                account.setAccountType(rs.getString(10));
+//                account.setPersonId(rs.getInt(1));
+//                account.setUserName(rs.getString(2));
+//                account.setPassword(rs.getString(3));
+//                account.setFullName(rs.getString(4));
+//                account.setEmail(rs.getString(5));
+//                account.setBirthDate(rs.getDate(6));
+//                account.setJoinedDate(rs.getDate(7));
+//                account.setAddress(rs.getString(8));
+//                account.setDepartmentId(rs.getInt(9));
+//                account.setAccountType(rs.getString(10));
                 return account;
             }
         } catch (Exception e) {

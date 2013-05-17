@@ -7,19 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="location" value="${param.location}" />
-<c:set var="status" value="pending" />
-<c:set var="land_id" value="${param.land_id}" />
-<c:set var="building_id" value="${param.building_id}" />
+<c:set var="status" value="completed" />
+<c:set var="landId" value="${param.land_id}" />
+<c:set var="buildingId" value="${param.building_id}" />
+
 <jsp:useBean id="locationBean" scope="request" class="bean.LocationBean" />
-<jsp:useBean id="landBean" scope="request" class="bean.LandBean" />
-<jsp:setProperty name="landBean" property="location" value="${location}" />
-<jsp:setProperty name="landBean" property="status" value="pending" />
-
-<jsp:useBean id="buildingBean" scope="request" class="bean.BuildingBean" />
-<jsp:setProperty name="buildingBean" property="parentId" value="${land_id}" />
-
-<jsp:useBean id="roomBean" scope="request" class="bean.RoomBean" />
-<jsp:setProperty name="roomBean" property="parentId" value="${building_id}" />
+<jsp:useBean id="atomicBean" scope="request" class="bean.AtomicBean" />
+<jsp:setProperty name="atomicBean" property="locationId" value="${location}" />
+<jsp:setProperty name="atomicBean" property="status" value="completed" />
+<jsp:setProperty name="atomicBean" property="landId" value="${landId}" />
+<jsp:setProperty name="atomicBean" property="buildingId" value="${buildingId}" />
 
 <!DOCTYPE html>
 <html>
@@ -52,7 +49,7 @@
                     <h4>Lands</h4>
                     
                     <ul class="nav nav-list">
-                        <c:forEach var="land" items="${landBean.listLand}">
+                        <c:forEach var="land" items="${atomicBean.listLand}">
                         <li><a href="?land_id=${land.id}">${land.name}</a></li>
                         </c:forEach>
                     </ul>
@@ -62,8 +59,8 @@
                 <div class="span3">
                     <h4>Buildings</h4>
                     <ul class="nav nav-list">
-                        <c:forEach var="building" items="${buildingBean.listBuilding}">
-                        <li><a href="?land_id=${land_id}&building_id=${building.id}">${building.name}</a></li>
+                        <c:forEach var="building" items="${atomicBean.listBuilding}">
+                        <li><a href="?land_id=${landId}&building_id=${building.id}">${building.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -72,8 +69,8 @@
                     <h4>Constructions</h4>
                     
                     <ul class="nav nav-list">
-                        <c:forEach var="atomic" items="${roomBean.listRoom}">
-                        <li><a href="atomic.jsp?id=${atomic.id}">${atomic.name}</a></li>
+                        <c:forEach var="room" items="${atomicBean.listRoom}">
+                        <li><a href="atomic.jsp?id=${room.id}">${room.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>

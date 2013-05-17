@@ -81,7 +81,8 @@ public class ComplaintController {
             String imgSrc = isUpload == true ? ("Cimages/" + itemName) : null; //imgSrc
             HttpSession session = request.getSession();
             Account account = (Account) session.getAttribute("account");
-            int personId = account.getPersonId();
+            int personId = 1;
+            
             String severity = (String) params.get("severity"); //severity
             String rmtSupport = (String) params.get("rmtSupport"); //rmtSupport
             int contentId = new ComplaintDA().insertComplaint(title, content, categoryValue, imgSrc, personId, severity, rmtSupport);
@@ -120,7 +121,7 @@ public class ComplaintController {
             String title = (String) params.get("title"); //title
             String content = (String) params.get("content"); //content
             String imgSrc = isUpload == true ? ("Cimages/" + itemName) : null; //imgSrc
-            int personId = account.getPersonId(); //personId
+            int personId = 1; //personId
             int contentId = new ArticleDA().insert(title, content, imgSrc, personId);
             if (contentId > 0) {
                 request.setAttribute("contentId", contentId);
