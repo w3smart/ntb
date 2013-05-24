@@ -6,14 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="location" value="${param.location}" />
+<c:set var="locationId" value="${param.location}" />
 <c:set var="status" value="completed" />
 <c:set var="landId" value="${param.land_id}" />
 <c:set var="buildingId" value="${param.building_id}" />
 
 <jsp:useBean id="locationBean" scope="request" class="bean.LocationBean" />
 <jsp:useBean id="atomicBean" scope="request" class="bean.AtomicBean" />
-<jsp:setProperty name="atomicBean" property="locationId" value="${location}" />
+<jsp:setProperty name="atomicBean" property="locationId" value="${locationId}" />
 <jsp:setProperty name="atomicBean" property="status" value="completed" />
 <jsp:setProperty name="atomicBean" property="landId" value="${landId}" />
 <jsp:setProperty name="atomicBean" property="buildingId" value="${buildingId}" />

@@ -191,5 +191,4 @@ public class Atomic implements Serializable{
         return "Products{" + "id=" + id + ", name=" + name + ", address=" + address + ", price=" + price + ", status=" + status + ", area=" + area + ", creator=" + creator + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", description=" + description + '}';
     }
 
-    
 }

@@ -20,8 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.DiaryDA;
 import models.TechnicianDA;
 import models.ViewModelDA;
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import viewModel.ComplaintDetailViewModel;
@@ -33,134 +31,154 @@ import viewModel.ComplaintDetailViewModel;
 @WebServlet(name = "Controller", urlPatterns = {"/con"})
 public class Controller extends HttpServlet {
 
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * 
+     *
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
-            if (isMultiPart) {
-                new ComplaintController().addComplaint(request, response);
+
+            String action = request.getParameter("control");
+            out.println(action);
+            // Create new order
+            if ("Order".equals(action)) {
+                new OrderController().createOrder(request, response);
                 return;
-            } else {
-                String action = request.getParameter("action");
-                // login
-                if ("Order".equals(action)) {
-                    new OrderController().createOrder(request, response);
+            }
+            
+            if ("addLand".equals(action) || "editLand".equals(action)) {
+                new AtomicController().createAtomic(request, response);
+                return;
+            }
+            
+            if ("deleteLand".equals(action)) {
+                new AtomicController().deleteAtomic(request, response);
+                return;
+            }
+            
+            if ("addLocation".equals(action) || "editLocation".equals(action)) {
+                new LocationController().createLocation(request, response);
+                return;
+            }
+            
+            if("deleteLocation".equals(action)){
+                new LocationController().deleteLocation(request, response);
+                return;
+            }
+
+            if ("logoutSubmit".equals(action)) {
+                new AccountController().logoutUser(request, response);
+                return;
+            }
+
+            if ("loginSubmit".equals(action)) {
+                AccountController accCon = new AccountController();
+                accCon.validateUser(request, response);
+                return;
+            }
+            if ("logoutSubmit".equals(action)) {
+                new AccountController().logoutUser(request, response);
+                return;
+            }
+            // eng login
+
+            if ("isUser".equals(action)) {
+                EmployeeController empCon = new EmployeeController();
+                empCon.isUser(request, response);
+
+                return;
+            }
+            if ("ajaxAddEmployee".equals(action)) {
+                EmployeeController empCon = new EmployeeController();
+                empCon.insertEmployee(request, response);
+                return;
+            }
+            if ("getDepartmentList".equals(action)) {
+                out.print(new PrinterData().getDllTechnician());
+            }
+
+
+
+
+            if ("userList".equals(action)) {
+                String content = new PrinterData().put();
+                out.print(content);
+                return;
+            }
+            //COMPLAINT 
+            if ("viewComplaint".equals(action)) {
+                String paramContentId = request.getParameter("compId");
+                int contentId = Integer.parseInt(paramContentId);
+                request.setAttribute("contentId", contentId);
+                request.getRequestDispatcher(response.encodeRedirectURL("complaintDetail.jsp")).forward(request, response);
+            }
+
+            if ("ajaxViewComplaintBy".equals(action)) {
+                new DiaryController().ajaxViewComplaintByStatus(request, response);
+                return;
+            }
+            //END COMPLAINT
+
+            if ("ajaxGetPriority".equals(action)) {
+                int contentId = Integer.parseInt(request.getParameter("contentId"));
+                Diary diary = new DiaryDA().getDiary(contentId);
+                if (diary == null) {
                     return;
-                }
-                
-                if ("logoutSubmit".equals(action)) {
-                    new AccountController().logoutUser(request, response);
+                } else {
+                    JSONObject o = new JSONObject();
+                    o.put("priority", diary.getPriority());
+                    o.put("technician", diary.getPersonId());
+                    out.print(o.toString());
                     return;
-                }
-                
-                if ("loginSubmit".equals(action)) {
-                    AccountController accCon = new AccountController();
-                    accCon.validateUser(request, response);
-                    return;
-                }
-                if ("logoutSubmit".equals(action)) {
-                    new AccountController().logoutUser(request, response);
-                    return;
-                }
-                // eng login
-
-                if ("isUser".equals(action)) {
-                    EmployeeController empCon = new EmployeeController();
-                    empCon.isUser(request, response);
-
-                    return;
-                }
-                if ("ajaxAddEmployee".equals(action)) {
-                    EmployeeController empCon = new EmployeeController();
-                    empCon.insertEmployee(request, response);
-                    return;
-                }
-                if ("getDepartmentList".equals(action)) {
-                    out.print(new PrinterData().getDllTechnician());
-                }
-
-
-
-
-                if ("userList".equals(action)) {
-                    String content = new PrinterData().put();
-                    out.print(content);
-                    return;
-                }
-                //COMPLAINT 
-                if ("viewComplaint".equals(action)) {
-                    String paramContentId = request.getParameter("compId");
-                    int contentId = Integer.parseInt(paramContentId);
-                    request.setAttribute("contentId", contentId);
-                    request.getRequestDispatcher(response.encodeRedirectURL("complaintDetail.jsp")).forward(request, response);
-                }
-
-                if ("ajaxViewComplaintBy".equals(action)) {
-                    new DiaryController().ajaxViewComplaintByStatus(request, response);
-                    return;
-                }
-                //END COMPLAINT
-
-                if ("ajaxGetPriority".equals(action)) {
-                    int contentId = Integer.parseInt(request.getParameter("contentId"));
-                    Diary diary = new DiaryDA().getDiary(contentId);
-                    if (diary == null) {
-                        return;
-                    } else {
-                        JSONObject o = new JSONObject();
-                        o.put("priority", diary.getPriority());
-                        o.put("technician", diary.getPersonId());
-                        out.print(o.toString());
-                        return;
-                    }
-                }
-
-                //Complaint Detail
-                if ("updateComplaintDetail".equals(action)) {
-                    out.println("updateComplaintDetail");
-                    return;
-                }
-                if ("solvedComplaint".equals(action)) {
-                    String paramContentId = request.getParameter("hdContentId");
-                    int contentId = Integer.parseInt(paramContentId);
-                    ComplaintDetailViewModel compDt = new ViewModelDA().getComplaintDetail(contentId);
-                    request.setAttribute("compDt", compDt);
-                    request.getRequestDispatcher("solveComplaint.jsp").forward(request, response);
-                    return;
-                }
-
-                if ("solvedComplaintRd".equals(action)) {
-                    request.setAttribute("errorType", "diaryBlock");
-                    request.getRequestDispatcher("error.jsp").forward(request, response);
-                    return;
-                }
-
-                //End Complaint Detail
-                if ("approve".equals(action)) {
-                    int contentId = Integer.parseInt(request.getParameter("hdContentId"));
-                    out.println(contentId);
-                    request.setAttribute("contentId", contentId);
-                    request.getRequestDispatcher("approveComp.jsp").forward(request, response);
-                }
-
-                if ("updateDiary".equals(action)) {
-                    new DiaryController().updateDiary(request, response);
-                }
-
-                if ("insetDiary".equals(action)) {
-                    new DiaryController().insertDiary(request, response);
                 }
             }
+
+            //Complaint Detail
+            if ("updateComplaintDetail".equals(action)) {
+                out.println("updateComplaintDetail");
+                return;
+            }
+            if ("solvedComplaint".equals(action)) {
+                String paramContentId = request.getParameter("hdContentId");
+                int contentId = Integer.parseInt(paramContentId);
+                ComplaintDetailViewModel compDt = new ViewModelDA().getComplaintDetail(contentId);
+                request.setAttribute("compDt", compDt);
+                request.getRequestDispatcher("solveComplaint.jsp").forward(request, response);
+                return;
+            }
+
+            if ("solvedComplaintRd".equals(action)) {
+                request.setAttribute("errorType", "diaryBlock");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+                return;
+            }
+
+            //End Complaint Detail
+            if ("approve".equals(action)) {
+                int contentId = Integer.parseInt(request.getParameter("hdContentId"));
+                out.println(contentId);
+                request.setAttribute("contentId", contentId);
+                request.getRequestDispatcher("approveComp.jsp").forward(request, response);
+            }
+
+            if ("updateDiary".equals(action)) {
+                new DiaryController().updateDiary(request, response);
+            }
+
+            if ("insetDiary".equals(action)) {
+                new DiaryController().insertDiary(request, response);
+            }
+
         } finally {
             out.close();
         }
@@ -189,8 +207,10 @@ public class Controller extends HttpServlet {
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
+    /**
+     * Handles the HTTP
+     * <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -202,8 +222,10 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -215,8 +237,9 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
