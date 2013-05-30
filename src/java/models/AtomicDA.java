@@ -8,6 +8,7 @@ import entity.Atomic;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import tool.Tools;
@@ -22,30 +23,32 @@ public class AtomicDA {
     private Connection cnn;
     private CallableStatement cs;
     
-    public List<Atomic> get(int address, String status, String type, double priceMin, double priceMax, int parentId){
+    public List<Atomic> get(int location, String status, String type, double priceMin, double priceMax, int parentId, String name){
         List<Atomic> ll = new ArrayList<Atomic>();
         try {
             cnn = Tools.getConnection();
-            cs = cnn.prepareCall("{call getProduct(?,?,?,?,?,?,?)}");
+            cs = cnn.prepareCall("{call getProduct(?,?,?,?,?,?,?,?,?)}");
             
             cs.setInt(1, 0);
-            status = ( status.equalsIgnoreCase("") ) ? null : status;
-            type = ( type.equalsIgnoreCase("") ) ? null : type;
-            
-            cs.setInt(2, address);
+            status = ( status == null ) ? "" : status;
+            type = ( status == null ) ? "" : type;
+            name = ( name == null ) ? "" : name;
+            cs.setInt(2, location);
             cs.setString(3, status);
             cs.setString(4, type);        
             cs.setDouble(5, priceMin);
             cs.setDouble(6, priceMax);
             cs.setInt(7, parentId);
-            
+            cs.setString(8, "*");
+            cs.setString(9, name);
+
             rs = cs.executeQuery();
             while (rs.next()) {
                 Atomic p = new Atomic();
 
                 p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
-                p.setAddress(rs.getInt(3));
+                p.setLocation(rs.getInt(3));
                 p.setPrice(rs.getDouble(4));
                 p.setStatus(rs.getString(5));
                 p.setArea(rs.getDouble(6));
@@ -64,7 +67,6 @@ public class AtomicDA {
             }
             return ll;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         } finally {
             Tools.closeAllConnection(cnn, rs, cs);
@@ -72,6 +74,10 @@ public class AtomicDA {
     }
     
     public Atomic get(int id){
+        if (id <= 0){
+            return null;
+        }
+        
         Atomic p = new Atomic();
         try {
             cnn = Tools.getConnection();
@@ -82,7 +88,7 @@ public class AtomicDA {
             while (rs.next()) {
                 p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
-                p.setAddress(rs.getInt(3));
+                p.setLocation(rs.getInt(3));
                 p.setPrice(rs.getDouble(4));
                 p.setStatus(rs.getString(5));
                 p.setArea(rs.getDouble(6));
@@ -99,7 +105,6 @@ public class AtomicDA {
             }
             return p;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         } finally {
             Tools.closeAllConnection(cnn, rs, cs);
@@ -107,10 +112,77 @@ public class AtomicDA {
     }
     
     public boolean remove(int id){
-        return false;
+        try {
+            cnn = Tools.getConnection();
+            cs = cnn.prepareCall("{call deleteProduct(?)}");
+            cs.setInt(1, id);
+            boolean res = (cs.executeUpdate()) > 0 ? true : false;
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            Tools.closeAllConnection(cnn, rs, cs);
+        }
     }
     
-    public boolean add(Atomic atomic){
-        return false;
+    public int add(Atomic atomic){
+        try {
+            cnn = Tools.getConnection();
+            cs = cnn.prepareCall("{call insertProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");  //13 params
+            cs.setString(1, atomic.name);
+            cs.setInt(2, atomic.location);
+            cs.setDouble(3, atomic.price);
+            cs.setString(4, atomic.status);
+            cs.setDouble(5, atomic.area);
+            cs.setInt(6, atomic.creator);
+            cs.setString(7, atomic.description);
+            cs.setInt(8, atomic.parentId);
+            cs.setString(9, atomic.type);
+            cs.setString(10, atomic.thumbnail);
+            cs.setInt(11, atomic.numOfFloor);
+            cs.setInt(12, atomic.floorNumber);
+            cs.setInt(13, atomic.roomEachFloor);
+            //cs.setInt(14, 0);
+            cs.registerOutParameter(14, Types.INTEGER);
+            boolean res = (cs.executeUpdate()) > 0 ? true : false;
+            int id = res == true ? cs.getInt(14) : 0;
+            return id;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        } finally {
+            Tools.closeAllConnection(cnn, rs, cs);
+        }
     }
+    
+    public boolean update(Atomic atomic){
+        try {
+            cnn = Tools.getConnection();
+            cs = cnn.prepareCall("{call updateProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");  //13 params
+            cs.setInt(1, atomic.id);
+            cs.setString(2, atomic.name);
+            cs.setInt(3, atomic.location);
+            cs.setDouble(4, atomic.price);
+            cs.setString(5, atomic.status);
+            cs.setDouble(6, atomic.area);
+            cs.setInt(7, atomic.creator);
+            cs.setString(8, atomic.description);
+            cs.setInt(9, atomic.parentId);
+            cs.setString(10, atomic.type);
+            cs.setString(11, atomic.thumbnail);
+            cs.setInt(12, atomic.numOfFloor);
+            cs.setInt(13, atomic.floorNumber);
+            cs.setInt(14, atomic.roomEachFloor);
+            boolean res = (cs.executeUpdate()) > 0 ? true : false;
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            Tools.closeAllConnection(cnn, rs, cs);
+        }
+    }
+    
+    
 }

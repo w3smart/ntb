@@ -1,4 +1,7 @@
 body {
-        padding-top: 60px;
-        padding-bottom: 40px;
+    font-family: Arial, Segoe UI, "Times new roman", sans-serif;
+    padding: 60px 0 30px;
+}
+#main{
+    min-height: 500px;
 }

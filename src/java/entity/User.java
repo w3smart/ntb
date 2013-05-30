@@ -1,48 +1,43 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
+
+import java.io.Serializable;
 
 /**
  *
- * @author fpoly
+ * @author tannt
  */
-public class User {
+public class User implements Serializable{
     public int id;
-    public String email;
+    public String username;
     public String password;
     public String role;
-    public String bio;
+    public String email;
     public String dateCreated;
     public String dateModified;
     public String address;
     public String phone;
-    public String aliasName;
 
-    public User(int id, String email, String password, String role, String bio, String dateCreated, String dateModified, String address, String phone, String aliasName) {
+    public User(int id, String username, String password, String role, String email, String dateCreated, String dateModified, String address, String phone) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.role = role;
-        this.bio = bio;
+        this.email = email;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
         this.address = address;
         this.phone = phone;
-        this.aliasName = aliasName;
     }
 
-    public User(String email, String password, String role, String bio, String dateCreated, String dateModified, String address, String phone, String aliasName) {
-        this.email = email;
+    public User(String username, String password, String role, String email, String dateCreated, String dateModified, String address, String phone) {
+        this.username = username;
         this.password = password;
         this.role = role;
-        this.bio = bio;
+        this.email = email;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
         this.address = address;
         this.phone = phone;
-        this.aliasName = aliasName;
     }
 
     public User() {
@@ -56,12 +51,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -80,12 +75,12 @@ public class User {
         this.role = role;
     }
 
-    public String getBio() {
-        return bio;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDateCreated() {
@@ -120,13 +115,9 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAliasName() {
-        return aliasName;
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", email=" + email + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", address=" + address + ", phone=" + phone + '}';
     }
 
-    public void setAliasName(String aliasName) {
-        this.aliasName = aliasName;
-    }
-    
-    
 }

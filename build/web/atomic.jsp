@@ -35,7 +35,7 @@
                  
                  <form name="formOrderAtomic" method="post" action="con">
                      <input type="hidden" name="id" value="${atomicBean.room.id}" />
-                     <button class="readmore" type="submit" value="Order" name="action" >Order</button>
+                     <button class="readmore" type="submit" value="Order" name="control" >Order</button>
                  </form>
             </div>
         </div>

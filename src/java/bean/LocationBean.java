@@ -10,7 +10,7 @@ import models.LocationDA;
 
 /**
  *
- * @author fpoly
+ * @author tannt
  */
 public class LocationBean {
     private List<Location> list;
@@ -43,5 +43,5 @@ public class LocationBean {
     public void setLocation(Location location) {
         this.location = location;
     }
-
+    
 }

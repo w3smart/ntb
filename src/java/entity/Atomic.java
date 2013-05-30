@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
@@ -14,7 +10,7 @@ public class Atomic implements Serializable{
     
     public int id;
     public String name;
-    public int address;
+    public int location;
     public double price;
     public String status;
     public double area;
@@ -29,10 +25,10 @@ public class Atomic implements Serializable{
     public int floorNumber;
     public int roomEachFloor;
     
-    public Atomic(int id, String name, int address, double price, String status, double area, int creator, String dateCreated, String dateModified, String description) {
+    public Atomic(int id, String name, int location, double price, String status, double area, int creator, String dateCreated, String dateModified, String description) {
         this.id = id;
         this.name = name;
-        this.address = address;
+        this.location = location;
         this.price = price;
         this.status = status;
         this.area = area;
@@ -42,9 +38,9 @@ public class Atomic implements Serializable{
         this.description = description;
     }
 
-    public Atomic(String name, int address, double price, String status, double area, int creator, String dateCreated, String dateModified, String description) {
+    public Atomic(String name, int location, double price, String status, double area, int creator, String dateCreated, String dateModified, String description) {
         this.name = name;
-        this.address = address;
+        this.location = location;
         this.price = price;
         this.status = status;
         this.area = area;
@@ -73,13 +69,7 @@ public class Atomic implements Serializable{
         this.name = name;
     }
 
-    public int getAddress() {
-        return address;
-    }
-
-    public void setAddress(int address) {
-        this.address = address;
-    }
+   
 
     public double getPrice() {
         return price;
@@ -185,11 +175,16 @@ public class Atomic implements Serializable{
         this.roomEachFloor = roomEachFloor;
     }
 
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
+    }
     
     @Override
     public String toString() {
-        return "Products{" + "id=" + id + ", name=" + name + ", address=" + address + ", price=" + price + ", status=" + status + ", area=" + area + ", creator=" + creator + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", description=" + description + '}';
+        return "Products{" + "id=" + id + ", name=" + name + ", location=" + location + ", price=" + price + ", status=" + status + ", area=" + area + ", creator=" + creator + ", dateCreated=" + dateCreated + ", dateModified=" + dateModified + ", description=" + description + '}';
     }
-
-    
 }

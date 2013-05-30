@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bean;
 
 import entity.Atomic;
@@ -13,9 +9,9 @@ import models.AtomicDA;
  * @author manhnt
  */
 public class AtomicBean {
-    private int locationId = 0;
-
+    private int locationId;
     private String status = null;
+    private String name = null;
 
     private List<Atomic> listLand;
     private Atomic land;
@@ -24,12 +20,12 @@ public class AtomicBean {
     private List<Atomic> listBuilding;
     private Atomic building;
     private int buildingId;
-    private int buildingParentId = 1;
+    private int buildingParentId;
     
     private List<Atomic> listRoom;
     private Atomic room;
     private int roomId;
-    private int roomParentId = 2;
+    private int roomParentId;
     
     
     public AtomicBean() {
@@ -39,12 +35,36 @@ public class AtomicBean {
         return locationId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getBuildingParentId() {
+        return buildingParentId;
+    }
+
+    public void setBuildingParentId(int buildingParentId) {
+        this.buildingParentId = buildingParentId;
+    }
+
+    public int getRoomParentId() {
+        return roomParentId;
+    }
+
+    public void setRoomParentId(int roomParentId) {
+        this.roomParentId = roomParentId;
+    }
+
     public void setLocationId(int locationId) {
         this.locationId = locationId;
     }
 
     public List<Atomic> getListLand() {
-        return new AtomicDA().get(this.locationId, this.status, "land", 0, 0, 0);
+        return new AtomicDA().get(this.locationId, this.status, "land", 0, 0, 0, this.name);
     }
 
     public void setListLand(List<Atomic> listLand) {
@@ -69,7 +89,7 @@ public class AtomicBean {
 
     public List<Atomic> getListBuilding() {
         this.buildingParentId = ( this.landId > 0 ) ? this.landId : -1;
-        return new AtomicDA().get(this.locationId, this.status, "building", 0, 0, this.buildingParentId);
+        return new AtomicDA().get(this.locationId, this.status, "building", 0, 0, this.buildingParentId, this.name);
     }
 
     public void setListBuilding(List<Atomic> listBuilding) {
@@ -94,7 +114,7 @@ public class AtomicBean {
 
     public List<Atomic> getListRoom() {
         this.roomParentId = ( this.buildingId > 0 ) ? this.buildingId : -1;
-        return new AtomicDA().get(this.locationId, this.status, "room", 0, 0, this.roomParentId);
+        return new AtomicDA().get(this.locationId, this.status, "room", 0, 0, this.roomParentId, this.name);
     }
 
     public void setListRoom(List<Atomic> listRoom) {

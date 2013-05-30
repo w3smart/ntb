@@ -28,17 +28,18 @@ public class AccountController {
             String url = request.getParameter("url");
             Account account = new AccountDA().getAccount(username, password);
 
-            if (account != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("account", account);
-                String target = (url == null) ? "index.jsp" : url;
-                response.sendRedirect(target);
-            } else {
-                String param = (url == null) ? null : url;
-                request.setAttribute("url", param);
-                request.setAttribute("res", "Login failed!!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            }
+//            if (account != null) {
+//                HttpSession session = request.getSession();
+//                session.setAttribute("account", account);
+//                String target = (url == null) ? "index.jsp" : url;
+//                response.sendRedirect(target);
+//            } else {
+//                String param = (url == null) ? null : url;
+//                request.setAttribute("url", param);
+//                request.setAttribute("res", "Login failed!!");
+//                request.getRequestDispatcher("login.jsp").forward(request, response);
+//            }
+            out.print(username);
         } finally {
             out.close();
         }
