@@ -33,6 +33,7 @@ public class LocationDA {
             }
             return ll;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         } finally {
             Tools.closeAllConnection(cnn, rs, cs);
@@ -40,9 +41,6 @@ public class LocationDA {
     }
     
     public Location getLocation(int id){
-        
-        if(id<=0){return null;}
-        
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call getLocation(?)}");
@@ -52,57 +50,11 @@ public class LocationDA {
                 return new Location(rs.getInt(1), rs.getString(2));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         } finally {
             Tools.closeAllConnection(cnn, rs, cs);
         }
         return null;
-    }
-    
-    public boolean add(Location location){
-        try {
-            cnn = Tools.getConnection();
-            cs = cnn.prepareCall("{call insertLocation(?)}");  //13 params
-            cs.setString(1, location.location);
-            boolean res = (cs.executeUpdate()) > 0 ? true : false;
-            return res;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        } finally {
-            Tools.closeAllConnection(cnn, rs, cs);
-        }
-    }
-    
-    public boolean update(Location location){
-        try {
-            cnn = Tools.getConnection();
-            cs = cnn.prepareCall("{call updateLocation(?,?)}");  //13 params
-            cs.setInt(1, location.id);
-            cs.setString(2, location.location);
-            boolean res = (cs.executeUpdate()) > 0 ? true : false;
-            return res;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        } finally {
-            Tools.closeAllConnection(cnn, rs, cs);
-        }
-    }
-    
-    
-    public boolean remove(int id){
-        try {
-            cnn = Tools.getConnection();
-            cs = cnn.prepareCall("{call deleteLocation(?)}");  //13 params
-            cs.setInt(1, id);
-            boolean res = (cs.executeUpdate()) > 0 ? true : false;
-            return res;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        } finally {
-            Tools.closeAllConnection(cnn, rs, cs);
-        }
     }
 }

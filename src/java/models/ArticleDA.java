@@ -41,7 +41,6 @@ public class ArticleDA {
             cs.setString(7, null);
             cs.setString(8, null);
             cs.setString(9, tool.Discriminator.ARTICLE);
-            cs.setInt(10, personId);
             cs.registerOutParameter(10, Types.INTEGER);
             boolean res = (cs.executeUpdate()) > 0 ? true : false;
             int contentId = res == true ? cs.getInt(10) : 0;
