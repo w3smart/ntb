@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import entity.User;
@@ -35,8 +31,7 @@ public class UserController {
             String email = request.getParameter("inputEmail");
             String address = request.getParameter("inputAddress");
             String phone = request.getParameter("inputPhone");
-            
-           
+
             User u = new User(username, password, role, email, null, null, address, phone);
 
             boolean res;
@@ -103,6 +98,7 @@ public class UserController {
                 if (u.role.equals("admin") || u.role.equals("manager")) {
                     response.sendRedirect("admin/statistics.jsp");
                 } else {
+                    // Customer
                     response.sendRedirect("index.jsp");
                 }
             } else {
@@ -143,6 +139,13 @@ public class UserController {
         }
     }
 
+    protected void logout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        response.sendRedirect("admin/index.jsp?status=loggedOut");
+    }
+    
     protected void print(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();

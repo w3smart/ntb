@@ -18,24 +18,24 @@ import tool.Tools;
  * @author fpoly
  */
 public class AtomicDA {
-    
+
     private ResultSet rs;
     private Connection cnn;
     private CallableStatement cs;
-    
-    public List<Atomic> get(int location, String status, String type, double priceMin, double priceMax, int parentId, String name){
+
+    public List<Atomic> get(int location, String status, String type, double priceMin, double priceMax, int parentId, String name) {
         List<Atomic> ll = new ArrayList<Atomic>();
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call getProduct(?,?,?,?,?,?,?,?,?)}");
-            
+
             cs.setInt(1, 0);
-            status = ( status == null ) ? "" : status;
-            type = ( status == null ) ? "" : type;
-            name = ( name == null ) ? "" : name;
+            status = (status == null) ? "" : status;
+            type = (status == null) ? "" : type;
+            name = (name == null) ? "" : name;
             cs.setInt(2, location);
             cs.setString(3, status);
-            cs.setString(4, type);        
+            cs.setString(4, type);
             cs.setDouble(5, priceMin);
             cs.setDouble(6, priceMax);
             cs.setInt(7, parentId);
@@ -72,17 +72,55 @@ public class AtomicDA {
             Tools.closeAllConnection(cnn, rs, cs);
         }
     }
-    
-    public Atomic get(int id){
-        if (id <= 0){
+
+    public List<Atomic> getOrderItem(int userId) {
+        List<Atomic> ll = new ArrayList<Atomic>();
+        try {
+            cnn = Tools.getConnection();
+            cs = cnn.prepareCall("{call getOrderItem(?)}");
+            cs.setInt(1, userId);
+            
+            rs = cs.executeQuery();
+            while (rs.next()) {
+                Atomic p = new Atomic();
+
+                p.setId(rs.getInt(1));
+                p.setName(rs.getString(2));
+                p.setLocation(rs.getInt(3));
+                p.setPrice(rs.getDouble(4));
+                p.setStatus(rs.getString(5));
+                p.setArea(rs.getDouble(6));
+                p.setCreator(rs.getInt(7));
+                p.setDateCreated(rs.getString(8));
+                p.setDateModified(rs.getString(9));
+                p.setDescription(rs.getString(10));
+                p.setParentId(rs.getInt(11));
+                p.setType(rs.getString(12));
+                p.setThumbnail(rs.getString(13));
+                p.setNumOfFloor(rs.getInt(14));
+                p.setFloorNumber(rs.getInt(15));
+                p.setRoomEachFloor(rs.getInt(16));
+
+                ll.add(p);
+            }
+            return ll;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            Tools.closeAllConnection(cnn, rs, cs);
+        }
+    }
+
+    public Atomic get(int id) {
+        if (id <= 0) {
             return null;
         }
-        
+
         Atomic p = new Atomic();
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call getProduct(?)}");
-            
+
             cs.setInt(1, id);
             rs = cs.executeQuery();
             while (rs.next()) {
@@ -110,8 +148,8 @@ public class AtomicDA {
             Tools.closeAllConnection(cnn, rs, cs);
         }
     }
-    
-    public boolean remove(int id){
+
+    public boolean remove(int id) {
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call deleteProduct(?)}");
@@ -125,8 +163,8 @@ public class AtomicDA {
             Tools.closeAllConnection(cnn, rs, cs);
         }
     }
-    
-    public int add(Atomic atomic){
+
+    public int add(Atomic atomic) {
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call insertProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");  //13 params
@@ -155,8 +193,8 @@ public class AtomicDA {
             Tools.closeAllConnection(cnn, rs, cs);
         }
     }
-    
-    public boolean update(Atomic atomic){
+
+    public boolean update(Atomic atomic) {
         try {
             cnn = Tools.getConnection();
             cs = cnn.prepareCall("{call updateProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");  //13 params
@@ -183,6 +221,4 @@ public class AtomicDA {
             Tools.closeAllConnection(cnn, rs, cs);
         }
     }
-    
-    
 }

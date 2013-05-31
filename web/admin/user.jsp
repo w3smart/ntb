@@ -25,6 +25,13 @@
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/style.css" />
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-responsive.css" />
         <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="../bootstrap/js/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                $('#formUser').validate(); 
+            });
+        </script>
     </head>
     <body>
         <%@include file="menu.jsp" %>
@@ -63,28 +70,28 @@
             <div class="row">
                 <div class="span8">
                     <h1>User</h1>
-                    <form name="formUser" method="post" action="../con">
+                    <form name="formUser" id="formUser" method="post" action="../con">
                         <c:choose>
                             <c:when test="${action == 'edit'}">
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputUserName">Username</label>
                                     <div class="controls">
-                                        <input type="text" name="inputUserName" value="${userBean.user.username}" id="inputUserName" placeholder="Username" />
+                                        <input type="text" class="required" minlength="4" name="inputUserName" value="${userBean.user.username}" id="inputUserName" placeholder="Username" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputUserPassword">Password</label>
                                     <div class="controls">
-                                        <input type="password" name="inputUserPassword" id="inputUserPassword" value="password" />
+                                        <input type="password" class="required" minlength="6" name="inputUserPassword" id="inputUserPassword" value="password" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputRetypePassword">Re-type Password</label>
                                     <div class="controls">
-                                        <input type="password" name="inputRetypePassword" id="inputRetypePassword" value="password" />
+                                        <input type="password" equalTo="#inputUserPassword" class="required" minlength="6" name="inputRetypePassword" id="inputRetypePassword" value="password" />
                                     </div>
                                 </div>
 
@@ -109,7 +116,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmail">Email</label>
                                     <div class="controls">
-                                        <input type="text" name="inputEmail" id="inputEmail" placeholder="Email" value="${userBean.user.email}" />
+                                        <input type="text" class="required email" name="inputEmail" id="inputEmail" placeholder="Email" value="${userBean.user.email}" />
                                     </div>
                                 </div>
 
@@ -137,21 +144,21 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputUserName">Username</label>
                                     <div class="controls">
-                                        <input type="text" name="inputUserName" id="inputUserName" placeholder="Username" />
+                                        <input type="text" class="required" minlength="4" name="inputUserName" id="inputUserName" placeholder="Username" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputUserPassword">Password</label>
                                     <div class="controls">
-                                        <input type="password" name="inputUserPassword" id="inputUserPassword" placeholder="Password" />
+                                        <input type="password" class="required" minlength="6" name="inputUserPassword" id="inputUserPassword" placeholder="Password" />
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputRetypePassword">Re-type Password</label>
                                     <div class="controls">
-                                        <input type="password" name="inputRetypePassword" id="inputRetypePassword" placeholder="Re-type Password" />
+                                        <input type="password" class="required" equalTo="#inputUserPassword" minlength="6" name="inputRetypePassword" id="inputRetypePassword" placeholder="Re-type Password" />
                                     </div>
                                 </div>
 
@@ -169,7 +176,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmail">Email</label>
                                     <div class="controls">
-                                        <input type="text" name="inputEmail" id="inputEmail" placeholder="Email" />
+                                        <input type="text" class="required email" name="inputEmail" id="inputEmail" placeholder="Email" />
                                     </div>
                                 </div>
 

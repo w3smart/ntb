@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="message" value="${param.status}" />
 <jsp:useBean id="locationBean" scope="request" class="bean.LocationBean" />
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" isErrorPage="true" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -125,7 +125,13 @@
                             Registration successfully! Click <a href="index.jsp">here</a> to continue!
                         </div>
                     </c:if>
-
+                    
+                    
+                    <c:if test="${message == '404'}" >
+                        <div class="alert alert-success">
+                            The resource you requested can't be found. Maybe you'll need to <a href="admin/">Login</a> to continue
+                        </div>
+                    </c:if>
                 </div>
             </div>
             

@@ -86,11 +86,11 @@
     </head>
     <body>
         <div class="container">
-
+            <%@include file="header.jsp" %>
+            
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="admin/">Login</a></li>
-                    <li><a href="register.jsp">Register</a></li>
+                    <%= userOutput %>
                 </ul>
                 <h1 class="muted"><a href="index.jsp">NTB Services</a></h1>
                 

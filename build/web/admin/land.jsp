@@ -26,6 +26,17 @@
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/style.css" />
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-responsive.css" />
         <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/jquery.validate.min.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                $('#formLand').validate();
+                
+                $('.delete-building').click(function(){
+                    return confirm("Are you sure want to delete?");
+                });
+            });
+            
+        </script>
     </head>
     <body>
         <%@include file="menu.jsp" %>
@@ -77,7 +88,7 @@
                 <div class="span4">
                     <h1>Land Management</h1>
 
-                    <form name="formLand" method="post" action="../con">
+                    <form name="formLand" id="formLand" method="post" action="../con">
 
                         <input type="hidden" name="parentId" value="0" />
                         <input type="hidden" name="inputThumbnail" value="" />
@@ -86,13 +97,14 @@
                         <input type="hidden" name="inputFloorNumber" value="0" />
                         <input type="hidden" name="inputRoomEachFloor" value="0" />
                         <input type="hidden" name="page" value="land" />
+
                         <c:choose>
                             <c:when test="${action == 'edit'}">
 
                                 <div class="control-group">
                                     <label class="control-label" for="inputName">Name</label>
                                     <div class="controls">
-                                        <input type="text" name="inputName" value="${atomicBean.land.name}" id="inputName" placeholder="Name" />
+                                        <input type="text" name="inputName" class="required" value="${atomicBean.land.name}" id="inputName" placeholder="Name" />
                                     </div>
                                 </div>
 
@@ -124,7 +136,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputPrice">Price (For each meter square)</label>
                                     <div class="controls">
-                                        <input type="text" name="inputPrice" id="inputPrice" placeholder="Price" value="${atomicBean.land.price}" />
+                                        <input type="text" name="inputPrice" class="required number" id="inputPrice" placeholder="Price" value="${atomicBean.land.price}" />
                                     </div>
                                 </div>
 
@@ -149,23 +161,10 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputArea">Area</label>
                                     <div class="controls">
-                                        <input type="text" id="inputArea" name="inputArea" value="${atomicBean.land.area}" placeholder="Area" />
+                                        <input type="text" id="inputArea" name="inputArea" class="required number" value="${atomicBean.land.area}" placeholder="Area" />
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputCreator">Creator</label>
-                                    <div class="controls">
-                                        <select name="inputCreator" id="inputCreator">
-                                            <c:forEach var="creator" items="1,2,3,4,5">
-                                                <c:if test="${atomicBean.land.creator == $creator}">
-                                                    <option value="${creator}" selected>${creator}</option>
-                                                </c:if>
-                                                <option value="${creator}">${creator}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
                                 <input type="hidden" name="inputId" value="${param.id}" />
                                 <input type="hidden" name="control" value="editLand" />
                                 <input type="submit" name="updateLand" class="btn btn-primary" value="Update Land" />
@@ -176,7 +175,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputName">Name</label>
                                     <div class="controls">
-                                        <input type="text" name="inputName" id="inputName" placeholder="Name" />
+                                        <input type="text" name="inputName" class="required" id="inputName" placeholder="Name" />
                                     </div>
                                 </div>
 
@@ -201,7 +200,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputPrice">Price (For each meter square)</label>
                                     <div class="controls">
-                                        <input type="text" name="inputPrice" id="inputPrice" placeholder="Price" />
+                                        <input type="text" name="inputPrice" id="inputPrice" class="required number" placeholder="Price" />
                                     </div>
                                 </div>
 
@@ -219,20 +218,10 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputArea">Area</label>
                                     <div class="controls">
-                                        <input type="text" id="inputArea" name="inputArea" placeholder="Area" />
+                                        <input type="text" class="required number" id="inputArea" name="inputArea" placeholder="Area" />
                                     </div>
                                 </div>
 
-                                <div class="control-group">
-                                    <label class="control-label" for="inputCreator">Creator</label>
-                                    <div class="controls">
-                                        <select name="inputCreator" id="inputCreator">
-                                            <c:forEach var="creator" items="1,2,3,4,5">
-                                                <option value="${creator}">${creator}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
                                 <input type="hidden" name="control" value="addLand" />
                                 <input type="submit" name="submitLand" class="btn" value="Add New Land" />
                             </c:otherwise>
@@ -255,7 +244,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Area</th>
-                                        <th>Price per Metres</th>
+                                        <th>Total Price</th>
                                         <th>Number Floor</th>
                                         <th>R.E.F</th>
                                         <th>Status</th>
@@ -267,13 +256,17 @@
                                         <tr>
                                             <td><a href="building.jsp?action=edit&land_id=${landId}&id=${building.id}">${building.name}</a></td>
                                             <td>${building.area}</td>
-                                            <td>${building.price}</td>
+                                            <td>
+                                                One Time $ <strong>${building.price*building.area}</strong><br />
+                                                Monthly $ <strong>${(building.price*building.area)+(building.price*building.area*5/100)}</strong><br />
+                                                Yearly $ <strong>${(building.price*building.area)+(building.price*building.area*3/100)}</strong><br />
+                                            </td>
                                             <td>${building.numOfFloor}</td>
                                             <td>${building.roomEachFloor}</td>
                                             <td>${building.status}</td>
                                             <td>
                                                 <a href="building.jsp?action=edit&land_id=${landId}&id=${building.id}" class="btn btn-mini"><i class="icon icon-pencil"></i> Edit</a>
-                                                <a href="../con?control=deleteBuilding&id=${building.id}" class="btn btn-mini btn-danger"><i class="icon icon-white icon-trash"></i> Remove</a>
+                                                <a href="../con?control=deleteAtomic&object=building&land_id=${landId}&id=${building.id}" class="btn btn-mini btn-danger delete-building"><i class="icon icon-white icon-trash"></i> Remove</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

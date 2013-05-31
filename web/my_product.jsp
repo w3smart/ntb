@@ -1,13 +1,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="message" value="${param.status}" />
 <jsp:useBean id="locationBean" scope="request" class="bean.LocationBean" />
-<%@page contentType="text/html" isErrorPage="true" pageEncoding="UTF-8"%>
+<jsp:useBean id="userOrderBean" scope="request" class="bean.UserOrderBean" />
+<jsp:setProperty name="userOrderBean" property="userId" value="${param.user_id}" />
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>System Message</title>
+        <title>My Registered List</title>
         <script type="text/javascript" src="bootstrap/js/jquery-2.0.0.min.js"></script>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
         <style type="text/css">
@@ -81,27 +83,28 @@
                 border-radius: 0 3px 3px 0;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/style.css" />
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css" />
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-
-        <div class="container">
+        <div class="container" id="main">
+            <%@include file="header.jsp" %>
+            
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="admin/">Login</a></li>
-                    <li><a href="register.jsp">Register</a></li>
+                    <%= userOutput %>
                 </ul>
                 <h1 class="muted"><a href="index.jsp">NTB Services</a></h1>
-
+                
                 <div class="clearfix"></div>
-
+                
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
                             <ul class="nav">
                                 <li class="active"><a href="index.jsp">Home</a></li>
-
+                                
                                 <c:forEach var="oLocation" items="${locationBean.list}">
                                     <li><a href="detail.jsp?location=${oLocation.id}">${oLocation.location}</a></li>
                                 </c:forEach>
@@ -111,35 +114,47 @@
                 </div><!-- /.navbar -->
             </div>
 
-            <div class="row">
-                <div class="span12">
+            <form name="formLands" id="formLands" method="get">
 
-                    <c:if test="${message == 'denyAccess'}" >
-                        <div class="alert alert-error">
-                            You don't have permission to access this Page ! Please contact <a href="#"> Administrator </a> if you have any trouble so as to are solved.
-                        </div>
-                    </c:if>
+                <div class="row">
+                    <div class="span12">
 
-                    <c:if test="${message == 'register-success'}" >
-                        <div class="alert alert-success">
-                            Registration successfully! Click <a href="index.jsp">here</a> to continue!
-                        </div>
-                    </c:if>
-                    
-                    
-                    <c:if test="${message == '404'}" >
-                        <div class="alert alert-success">
-                            The resource you requested can't be found. Maybe you'll need to <a href="admin/">Login</a> to continue
-                        </div>
-                    </c:if>
+                        <table class="table table-bordered table-striped table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price Per Meter (USD)</th>
+                                    <th>Area</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                <c:forEach var="room" items="${userOrderBean.list}">
+                                    <tr>
+                                        <td><p>${room.name}</p></td>
+                                        <td>$ ${room.price}</td>
+                                        <td>${room.area}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${room.status == 'waiting permit'}">
+                                                    <span class="label">${room.status}</span>
+                                                </c:when>
+                                                <c:when test="${room.status == 'completed permit'}">
+                                                    <span class="label label-success">${product.status}</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
-            </div>
-            
-            <hr />
-            
-            <div class="footer">
-                <p>&copy; NTB 2013. All rights reserved.</p>
-            </div>
+            </form>
         </div>
     </body>
 </html>

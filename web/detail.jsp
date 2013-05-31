@@ -96,11 +96,10 @@
     </head>
     <body>
         <div class="container">
-
+            <%@include file="header.jsp" %>
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="admin/">Login</a></li>
-                    <li><a href="register.jsp">Register</a></li>
+                    <%= userOutput%>
                 </ul>
                 <h1 class="muted"><a href="index.jsp">NTB Services</a></h1>
 
@@ -130,108 +129,109 @@
                             <li><a href="detail.jsp?location=${locationId}&land_id=${land.id}">${land.name}</a></li>
                         </c:forEach>
                     </ul>
-
-                    <h6>Detail for ${atomicBean.land.name}</h6>
-                    <table class="table table-bordered table-striped table-condensed">
-                        <tbody>
-                            <tr>
-                                <th>Area</th>
-                                <td>${atomicBean.land.area}</td>
-                            </tr>
-                            <tr>
-                                <th>Status</th>
-                                <td>${atomicBean.land.status}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <c:if test="${landId > 0}">
+                        <h6>Detail for ${atomicBean.land.name}</h6>
+                        <table class="table table-bordered table-striped table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th>Area</th>
+                                    <td>${atomicBean.land.area}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>${atomicBean.land.status}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <hr />          
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h5>Building in ${atomicBean.land.name}</h5>
 
-            <div class="row-fluid">
-                <div class="span12">
-                    <h5>Building in ${atomicBean.land.name}</h5>
-                    <ul class="nav nav-pills">
-                        <c:forEach var="building" items="${atomicBean.listBuilding}">
-                            <li><a href="detail.jsp?location=${locationId}&land_id=${landId}&building_id=${building.id}">${building.name}</a></li>
-                        </c:forEach>
-                    </ul>
+                        <ul class="nav nav-pills">
+                            <c:forEach var="building" items="${atomicBean.listBuilding}">
+                                <li><a href="detail.jsp?location=${locationId}&land_id=${landId}&building_id=${building.id}">${building.name}</a></li>
+                            </c:forEach>
+                        </ul>
 
-                    <table class="table table-bordered table-striped table-condensed">
-                        <tr>
-                            <th>Area</th>
-                            <td>${atomicBean.building.area}</td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td>${atomicBean.building.status}</td>
-                        </tr>
-                        <tr>
-                            <th>Num of floor</th>
-                            <td>${atomicBean.building.numOfFloor}</td>
-                        </tr>
-                        <tr>
-                            <th>Room each floor</th>
-                            <td>${atomicBean.building.roomEachFloor}</td>
-                        </tr>
-                    </table>
+                        <c:if test="${buildingId > 0}">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <tr>
+                                    <th>Area</th>
+                                    <td>${atomicBean.building.area}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td>${atomicBean.building.status}</td>
+                                </tr>
+                                <tr>
+                                    <th>Num of floor</th>
+                                    <td>${atomicBean.building.numOfFloor}</td>
+                                </tr>
+                                <tr>
+                                    <th>Room each floor</th>
+                                    <td>${atomicBean.building.roomEachFloor}</td>
+                                </tr>
+                            </table>
 
-                </div>
-            </div> 
-            
-            <hr />
-                        
-            <div class="row">
-                <div class="span12">
-                    <h5>Room in ${atomicBean.building.name}</h5>
-                    <ul class="nav nav-pills">
-                        <c:forEach var="room" items="${atomicBean.listRoom}">
-                            <li><a href="detail.jsp?location=${locationId}&land_id=${landId}&building_id=${buildingId}&room_id=${room.id}">${room.name}</a></li>
-                        </c:forEach>
-                    </ul>
-
-                    <table class="table table-bordered table-striped table-condensed table-hover">
-                        <tr>
-                            <th>Area</th>
-                            <td>${atomicBean.room.area}</td>
-
-                        </tr>
-                        <tr>
-                            <th>Price</th>
-                            <td>
-                                <p>One Time: $ ${atomicBean.room.price*atomicBean.room.area}</p>
-                                <p>Monthly: $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*5/100)}</p>
-                                <p>Yearly: $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*3/100)}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Floor no</th>
-                            <td>${atomicBean.room.floorNumber}</td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td>${atomicBean.room.status}</td>
-                        </tr>
-                    </table>
-
-                    <form method="post" name="formOrder" action="con">
-                        <div>
-                            Select payment type:
-                            <select name="inputPaymentType">
-                                <option value="onetime">One Time $ ${atomicBean.room.price*atomicBean.room.area} (Best value)</option>
-                                <option value="monthly">Monthly $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*5/100)}</option>
-                                <option value="yearly">Yearly $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*3/100)}</option>
-                            </select>
                         </div>
-                        <input type="hidden" name="control" value="Order" />
-                        <input type="hidden" name="inputProductId" value="${roomId}" />
-                        <input type="submit" class="btn btn-primary" name="submitOrder" value="Register Now" />
-                    </form>
-                </div>
-            </div> 
+                    </div>
 
-            <hr>
+                    <div class="row">
+                        <div class="span12">
+                            <h5>Room in ${atomicBean.building.name}</h5>
+                            <ul class="nav nav-pills">
+                                <c:forEach var="room" items="${atomicBean.listRoom}">
+                                    <li><a href="detail.jsp?location=${locationId}&land_id=${landId}&building_id=${buildingId}&room_id=${room.id}">${room.name}</a></li>
+                                </c:forEach>
+                            </ul>
+                            <c:if test="${roomId > 0}">
+                                <table class="table table-bordered table-striped table-condensed table-hover">
+                                    <tr>
+                                        <th>Area</th>
+                                        <td>${atomicBean.room.area}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Price</th>
+                                        <td>
+                                            <p>One Time: $ ${atomicBean.room.price*atomicBean.room.area}</p>
+                                            <p>Monthly: $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*5/100)}</p>
+                                            <p>Yearly: $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*3/100)}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Floor no</th>
+                                        <td>${atomicBean.room.floorNumber}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>${atomicBean.room.status}</td>
+                                    </tr>
+                                </table>
+
+                                <form method="post" name="formOrder" action="con">
+                                    <div>
+                                        Select payment type:
+                                        <select name="inputPaymentType">
+                                            <option value="onetime">One Time $ ${atomicBean.room.price*atomicBean.room.area} (Best value)</option>
+                                            <option value="monthly">Monthly $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*5/100)}</option>
+                                            <option value="yearly">Yearly $ ${(atomicBean.room.price*atomicBean.room.area)+(atomicBean.room.price*atomicBean.room.area*3/100)}</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="control" value="Order" />
+                                    <input type="hidden" name="inputProductId" value="${roomId}" />
+                                    <%= registerOutput %>
+                                </form>
+                            </div>
+                        </div> 
+
+                        <hr>
+                    </c:if>
+                </c:if>
+            </c:if>
 
             <div class="footer">
                 <p>&copy; NTB 2013. All rights reserved.</p>

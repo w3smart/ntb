@@ -89,7 +89,7 @@ public class AtomicBean {
 
     public List<Atomic> getListBuilding() {
         this.buildingParentId = ( this.landId > 0 ) ? this.landId : -1;
-        return new AtomicDA().get(this.locationId, this.status, "building", 0, 0, this.buildingParentId, this.name);
+        return new AtomicDA().get(0, this.status, "building", 0, 0, this.buildingParentId, this.name);
     }
 
     public void setListBuilding(List<Atomic> listBuilding) {
@@ -114,7 +114,7 @@ public class AtomicBean {
 
     public List<Atomic> getListRoom() {
         this.roomParentId = ( this.buildingId > 0 ) ? this.buildingId : -1;
-        return new AtomicDA().get(this.locationId, this.status, "room", 0, 0, this.roomParentId, this.name);
+        return new AtomicDA().get(0, this.status, "room", 0, 0, this.roomParentId, this.name);
     }
 
     public void setListRoom(List<Atomic> listRoom) {

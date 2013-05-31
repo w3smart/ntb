@@ -95,7 +95,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Location</th>
-                                    <th>Price (USD)</th>
+                                    <th>Price Per Meter (USD)</th>
                                     <th>Area</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -127,7 +127,7 @@
                                         </td>
                                         <td>
                                             <a class="btn btn-mini" role="button" href="land.jsp?action=edit&id=${land.id}"><i class="icon icon-pencil"></i> Edit</a>
-                                            <a class="btn btn-danger btn-mini delete-land" href="../con?control=deleteLand&id=${land.id}"><i class="icon icon-trash icon-white"></i> Remove</a>
+                                            <a class="btn btn-danger btn-mini delete-land" href="../con?control=deleteAtomic&object=land&id=${land.id}"><i class="icon icon-trash icon-white"></i> Remove</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

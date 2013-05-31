@@ -56,13 +56,21 @@ public class Controller extends HttpServlet {
                 return;
             }
             
-            if ("addLand".equals(action) || "editLand".equals(action)) {
+            
+            if ("addLand".equals(action) || "editLand".equals(action) 
+                || "addRoom".equals(action) || "editRoom".equals(action) 
+                || "addBuilding".equals(action) || "editBuilding".equals(action)) {
                 new AtomicController().createAtomic(request, response);
                 return;
             }
             
-            if ("deleteLand".equals(action)) {
+            if ("deleteAtomic".equals(action)) {
                 new AtomicController().deleteAtomic(request, response);
+                return;
+            }
+            
+            if ("deleteUser".equals(action)) {
+                new UserController().deleteUser(request, response);
                 return;
             }
             
@@ -88,6 +96,11 @@ public class Controller extends HttpServlet {
             
             if("login".equals(action)){
                 new UserController().login(request, response);
+                return;
+            }
+            
+            if("logOut".equals(action)){
+                new UserController().logout(request, response);
                 return;
             }
             

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : atomics
-    Created on : May 17, 2013, 4:19:05 PM
-    Author     : fpoly
---%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="locationId" value="${param.location}" />
 <c:set var="type" value="${param.type}" />

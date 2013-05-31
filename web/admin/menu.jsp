@@ -1,3 +1,19 @@
+<%@page import="entity.User"%>
+<%
+    User _u = (User) session.getAttribute("user");
+    String userOutput = "";
+    if (_u == null) {
+        response.sendRedirect("index.jsp?status=required_login");
+    } else {
+        if (!_u.getRole().equals("admin")) {
+            response.sendRedirect("../404.jsp?status=denyAccess");
+        }
+        else
+        {
+            userOutput = "Logged in as <a href=\"user.jsp?action=edit&id="+_u.id+"\">"+_u.username+"</a> | <a href=\"../con?control=logOut\">Logout</a>";
+        }
+    }
+%>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -6,9 +22,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="statistics.jsp">NTB</a>
+            <a class="brand" href="../">NTB</a>
             <div class="nav-collapse collapse">
-                <p class="navbar-text pull-right">Logged in as <a href="user.jsp?id=admin">admin</a></p>
+                
+                <p class="navbar-text pull-right"><%=userOutput%></p>
 
                 <ul class="nav">
                     <li><a href="statistics.jsp">Statistics</a></li>
