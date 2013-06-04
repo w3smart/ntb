@@ -95,7 +95,7 @@
                         </c:choose>
 
                         <label for="inputUsername">Username</label>
-                        <input type="text" minlength="4" name="inputUsername" required id="inputUsername" class="span3" placeholder="Email address">
+                        <input type="text" minlength="4" name="inputUsername" required id="inputUsername" class="span3" placeholder="Username">
                         <label for="inputPassword">Password</label>
                         <input type="password" minlength="4" name="inputPassword" required class="span3" id="inputPassword" placeholder="Password">
                         <input type="hidden" name="control" value="login" />

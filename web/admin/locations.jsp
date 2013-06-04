@@ -19,12 +19,14 @@
         <title>Land List</title>
         <script type="text/javascript" src="../bootstrap/js/jquery-2.0.0.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/style.css" />
         <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-responsive.css" />
         <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
 
         <div class="container">
+            <%@include file="menu.jsp" %>
             <form name="formLocation" method="post" action="../con">
                 <h2>Locations</h2>
                 

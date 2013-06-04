@@ -30,6 +30,7 @@
                 <ul class="nav">
                     <li><a href="statistics.jsp">Statistics</a></li>
                     <li><a href="orders.jsp">Sales</a></li>
+                    <li><a href="locations.jsp">Locations</a></li>
                     <li><a href="lands.jsp">Land, Building and Room</a></li>
                     <li><a href="users.jsp">Users</a></li>
                 </ul>

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Hoanvd
+ * @author tannt
  */
 public class Tools {
     private static final String USER = "sa";

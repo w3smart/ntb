@@ -90,7 +90,6 @@ public class LocationDA {
         }
     }
     
-    
     public boolean remove(int id){
         try {
             cnn = Tools.getConnection();

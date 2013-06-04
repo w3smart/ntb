@@ -208,7 +208,7 @@
                                     <label class="control-label" for="inputStatus">Status</label>
                                     <div class="controls">
                                         <select name="inputStatus" id="inputStatus">
-                                            <c:forEach var="status" items="waiting permit, received permit">
+                                            <c:forEach var="status" items="waiting permit, completed permit">
                                                 <option value="${status}">${status}</option>
                                             </c:forEach>
                                         </select>
@@ -235,7 +235,7 @@
                     <c:choose>
                         <c:when test="${atomicBean.listBuilding.size() == 0}">
                             <div class="alert">
-                                There's no building here. Do you want to <a href="building.jsp?action=add&parent=${landId}">create one</a>?
+                                There's no building here. Do you want to <a href="building.jsp?action=add&land_id=${landId}">create one</a>?
                             </div>
                         </c:when>
                         <c:otherwise>

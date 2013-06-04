@@ -8,7 +8,7 @@
 <jsp:useBean id="locationBean" scope="request" class="bean.LocationBean" />
 <jsp:useBean id="atomicBean" scope="request" class="bean.AtomicBean" />
 <jsp:setProperty name="atomicBean" property="locationId" value="${locationId}" />
-<jsp:setProperty name="atomicBean" property="status" value="completed" />
+<%--<jsp:setProperty name="atomicBean" property="status" value="completed" />--%>
 <jsp:setProperty name="atomicBean" property="landId" value="${landId}" />
 <jsp:setProperty name="atomicBean" property="buildingId" value="${buildingId}" />
 <jsp:setProperty name="atomicBean" property="roomId" value="${roomId}" />
